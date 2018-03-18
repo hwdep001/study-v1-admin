@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>기본 단어 생성</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="icontent" padding>
+
+    <div>
+        <button ion-button color="danger" (click)="createCatLec('sp')">이선재 맞춤법 생성</button>
+    </div>
+    <br>
+    <div>
+        <button ion-button color="danger" (click)="createCatLec('sl')">이선재 표준어 생성</button>
+    </div>
+    <br>
+    <div>
+        <button ion-button color="danger" (click)="createCatLec('lw')">이선재 외래어 생성</button>
+    </div>
+    <br>
+    <div>
+        <button ion-button color="danger" (click)="createCatLec('kw')">이선재 어휘 생성</button>
+    </div>
+    <br>
+    <div>
+        <button ion-button color="danger" (click)="createCatLec('cc')">이선재 한자 생성</button>
+    </div>
+    <br>
+    <div>
+        <button ion-button color="danger" (click)="createCatLec('c4')">이선재 한자성어 생성</button>
+    </div>
+    <br>
+    <div>
+        <button ion-button color="danger" (click)="createCatLec('ew')">이동기 영단어 생성</button>
+    </div>
+
+</ion-content>
