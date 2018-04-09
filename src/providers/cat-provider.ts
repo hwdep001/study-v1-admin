@@ -20,41 +20,13 @@ export class CatProvider {
         this.reqUrl = environment.requestUrl;
     }
 
-    getCatsBySubId(subId: string): Promise<Array<Cat>> {
-        return this._auth.getIdToken().then(idToken => {
-            return new Promise<Array<Cat>>((resolve, reject) => {
-
-                const reqData = {
-                    subId: subId
-                }
-
-                this.http.post(`${this.reqUrl}/cat/ad/list`, reqData, {
-                    headers: new HttpHeaders().set('Authorization', idToken)
-                }).subscribe(data => {
-
-                    const resData = data as ResponseDate;
-
-                    if (resData.res) {
-                        resolve(resData.data as Array<Cat>);
-                    } else {
-                        const msg: string = resData.code + ": " + resData.msg;
-                        reject(msg);
-                    }
-
-                }, err => {
-                    reject(err);
-                });
-            });
-        });
-    }
-
     insertCats(cats: Array<Cat>): Promise<any> {
         return this._auth.getIdToken().then(idToken => {
             return new Promise<any>((resolve, reject) => {
 
                 const reqData = cats;
 
-                this.http.post(`${this.reqUrl}/cat/ad/list/insert`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/cat/list/insert`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -80,7 +52,7 @@ export class CatProvider {
 
                 const reqData = cats;
 
-                this.http.post(`${this.reqUrl}/cat/ad/list/update`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/cat/list/update`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -106,7 +78,7 @@ export class CatProvider {
 
                 const reqData = catIds;
 
-                this.http.post(`${this.reqUrl}/cat/ad/list/delete`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/cat/list/delete`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -126,7 +98,35 @@ export class CatProvider {
         });
     }
 
-    isExistNameInSub(cat: Cat): Promise<boolean> {
+    getCatsBySubId(subId: string): Promise<Array<Cat>> {
+        return this._auth.getIdToken().then(idToken => {
+            return new Promise<Array<Cat>>((resolve, reject) => {
+
+                const reqData = {
+                    subId: subId
+                }
+
+                this.http.post(`${this.reqUrl}/ad/cat/list`, reqData, {
+                    headers: new HttpHeaders().set('Authorization', idToken)
+                }).subscribe(data => {
+
+                    const resData = data as ResponseDate;
+
+                    if (resData.res) {
+                        resolve(resData.data as Array<Cat>);
+                    } else {
+                        const msg: string = resData.code + ": " + resData.msg;
+                        reject(msg);
+                    }
+
+                }, err => {
+                    reject(err);
+                });
+            });
+        });
+    }
+
+    isExistCatNameInSub(cat: Cat): Promise<boolean> {
         return this._auth.getIdToken().then(idToken => {
             return new Promise<boolean>((resolve, reject) => {
 
@@ -135,7 +135,7 @@ export class CatProvider {
                     subId: cat.subId
                 }
 
-                this.http.post(`${this.reqUrl}/cat/ad/exist-name`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/cat/exist-name`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 

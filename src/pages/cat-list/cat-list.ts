@@ -84,7 +84,7 @@ export class CatListPage {
             num: this.cats.length+1
         }
 
-        this._cat.isExistNameInSub(newCat)
+        this._cat.isExistCatNameInSub(newCat)
             .then(isExist => {
 
                 if(isExist) {

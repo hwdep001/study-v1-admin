@@ -39,7 +39,7 @@ export class UserRolePage {
     }
 
     getRoles(): Promise<any> {
-        return this._user.getRolesByUser(this.uid)
+        return this._user.getMenuRolesByUser(this.uid)
             .then(rscs => {
                 this.rscs = rscs;
             });
@@ -54,7 +54,7 @@ export class UserRolePage {
 
     saveRoles() {
         this._cmn.Alert.confirm("저장하시겠습니까?").then(yes => {
-            this._user.updateRolesByUser(this.uid, this.rscs)
+            this._user.updateMenuRolesByUser(this.uid, this.rscs)
                 .then(() => this.initData())
                 .catch(err => {
                     console.log(err);

@@ -20,41 +20,13 @@ export class WordProvider {
         this.reqUrl = environment.requestUrl;
     }
 
-    getWordsByLecId(lecId: number): Promise<Array<Word>> {
-        return this._auth.getIdToken().then(idToken => {
-            return new Promise<Array<Word>>((resolve, reject) => {
-
-                const reqData = {
-                    lecId: lecId
-                }
-
-                this.http.post(`${this.reqUrl}/word/ad/list`, reqData, {
-                    headers: new HttpHeaders().set('Authorization', idToken)
-                }).subscribe(data => {
-
-                    const resData = data as ResponseDate;
-
-                    if (resData.res) {
-                        resolve(resData.data as Array<Word>);
-                    } else {
-                        const msg: string = resData.code + ": " + resData.msg;
-                        reject(msg);
-                    }
-
-                }, err => {
-                    reject(err);
-                });
-            });
-        });
-    }
-
     insertWords(words: Array<Word>): Promise<any> {
         return this._auth.getIdToken().then(idToken => {
             return new Promise<any>((resolve, reject) => {
 
                 const reqData = words;
 
-                this.http.post(`${this.reqUrl}/word/ad/list/insert`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/word/list/insert`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -80,7 +52,7 @@ export class WordProvider {
 
                 const reqData = words;
 
-                this.http.post(`${this.reqUrl}/word/ad/list/update`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/word/list/update`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -106,7 +78,7 @@ export class WordProvider {
 
                 const reqData = wordIds;
 
-                this.http.post(`${this.reqUrl}/word/ad/list/delete`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/word/list/delete`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -114,6 +86,34 @@ export class WordProvider {
 
                     if (resData.res) {
                         resolve();
+                    } else {
+                        const msg: string = resData.code + ": " + resData.msg;
+                        reject(msg);
+                    }
+
+                }, err => {
+                    reject(err);
+                });
+            });
+        });
+    }
+
+    getWordsByLecId(lecId: number): Promise<Array<Word>> {
+        return this._auth.getIdToken().then(idToken => {
+            return new Promise<Array<Word>>((resolve, reject) => {
+
+                const reqData = {
+                    lecId: lecId
+                }
+
+                this.http.post(`${this.reqUrl}/ad/word/list`, reqData, {
+                    headers: new HttpHeaders().set('Authorization', idToken)
+                }).subscribe(data => {
+
+                    const resData = data as ResponseDate;
+
+                    if (resData.res) {
+                        resolve(resData.data as Array<Word>);
                     } else {
                         const msg: string = resData.code + ": " + resData.msg;
                         reject(msg);

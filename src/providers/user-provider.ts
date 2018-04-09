@@ -22,6 +22,58 @@ export class UserProvider {
         this.reqUrl = environment.requestUrl;
     }
 
+    getUser(uid: string): Promise<Map<string, any>> {
+        return this._auth.getIdToken().then(idToken => {
+            return new Promise<Map<string, any>>((resolve, reject) => {
+
+                const data = {
+                    uid: uid
+                }
+
+                this.http.post(`${this.reqUrl}/ad/user/detail`, data, {
+                    headers: new HttpHeaders().set('Authorization', idToken)
+                }).subscribe(data => {
+
+                    const resData = data as ResponseDate;
+
+                    if (resData.res) {
+                        resolve(resData.data as Map<string, any>);
+                    } else {
+                        const msg: string = resData.code + ": " + resData.msg;
+                        reject(msg);
+                    }
+
+                }, err => {
+                    reject(err);
+                });
+            });
+        });
+    }
+
+    getUserList(): Promise<Array<User>> {
+        return this._auth.getIdToken().then(idToken => {
+            return new Promise<Array<User>>((resolve, reject) => {
+
+                this.http.post(`${this.reqUrl}/ad/user/list`, null, {
+                    headers: new HttpHeaders().set('Authorization', idToken)
+                }).subscribe(data => {
+
+                    const resData = data as ResponseDate;
+
+                    if (resData.res) {
+                        resolve(resData.data as Array<User>);
+                    } else {
+                        const msg: string = resData.code + ": " + resData.msg;
+                        reject(msg);
+                    }
+
+                }, err => {
+                    reject(err);
+                });
+            });
+        });
+    }
+
     updateUserRole(uid: string, roleId: number): Promise<any> {
         return this._auth.getIdToken().then(idToken => {
             return new Promise<any>((resolve, reject) => {
@@ -31,7 +83,7 @@ export class UserProvider {
                     roleId: roleId
                 }
 
-                this.http.post(`${this.reqUrl}/user/ad/update/role`, data, {
+                this.http.post(`${this.reqUrl}/ad/user/role/update`, data, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -59,7 +111,7 @@ export class UserProvider {
                     uid: uid
                 }
 
-                this.http.post(`${this.reqUrl}/user/ad/delete`, data, {
+                this.http.post(`${this.reqUrl}/ad/user/delete`, data, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -79,59 +131,7 @@ export class UserProvider {
         });
     }
 
-    getUser(uid: string): Promise<Map<string, any>> {
-        return this._auth.getIdToken().then(idToken => {
-            return new Promise<Map<string, any>>((resolve, reject) => {
-
-                const data = {
-                    uid: uid
-                }
-
-                this.http.post(`${this.reqUrl}/user/ad/detail`, data, {
-                    headers: new HttpHeaders().set('Authorization', idToken)
-                }).subscribe(data => {
-
-                    const resData = data as ResponseDate;
-
-                    if (resData.res) {
-                        resolve(resData.data as Map<string, any>);
-                    } else {
-                        const msg: string = resData.code + ": " + resData.msg;
-                        reject(msg);
-                    }
-
-                }, err => {
-                    reject(err);
-                });
-            });
-        });
-    }
-
-    getUserList(): Promise<Array<User>> {
-        return this._auth.getIdToken().then(idToken => {
-            return new Promise<Array<User>>((resolve, reject) => {
-
-                this.http.post(`${this.reqUrl}/user/ad/list`, null, {
-                    headers: new HttpHeaders().set('Authorization', idToken)
-                }).subscribe(data => {
-
-                    const resData = data as ResponseDate;
-
-                    if (resData.res) {
-                        resolve(resData.data as Array<User>);
-                    } else {
-                        const msg: string = resData.code + ": " + resData.msg;
-                        reject(msg);
-                    }
-
-                }, err => {
-                    reject(err);
-                });
-            });
-        });
-    }
-
-    getRolesByUser(uid: string): Promise<Array<RoleSubCat>> {
+    getMenuRolesByUser(uid: string): Promise<Array<RoleSubCat>> {
         return this._auth.getIdToken().then(idToken => {
             return new Promise<Array<RoleSubCat>>((resolve, reject) => {
 
@@ -139,7 +139,7 @@ export class UserProvider {
                     uid: uid
                 }
 
-                this.http.post(`${this.reqUrl}/user/ad/roles`, data, {
+                this.http.post(`${this.reqUrl}/ad/user/menu-role/list`, data, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -159,16 +159,16 @@ export class UserProvider {
         });
     }
 
-    updateRolesByUser(uid: string, roleSubCat: Array<RoleSubCat>): Promise<any> {
+    updateMenuRolesByUser(uid: string, roleSubCat: Array<RoleSubCat>): Promise<any> {
         return this._auth.getIdToken().then(idToken => {
             return new Promise<any>((resolve, reject) => {
 
                 const reqData = {
                     uid: uid,
-                    roleSubCat: roleSubCat
+                    rscDTOList: roleSubCat
                 }
 
-                this.http.post(`${this.reqUrl}/user/ad/roles/update`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/user/menu-role/list/update`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -196,7 +196,7 @@ export class UserProvider {
                     uid: uid
                 }
 
-                this.http.post(`${this.reqUrl}/home/word/count`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/user/stat`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 

@@ -78,7 +78,7 @@ export class AuthProvider {
         return this.getIdToken().then(idToken => {
           return new Promise<User>((resolve, reject) => {
 
-            this.http.post(`${this.reqUrl}/auth/ad/sign-in-up`, null, {
+            this.http.post(`${this.reqUrl}/ad/auth/sign-in-up`, null, {
               headers: new HttpHeaders().set('Authorization', idToken)
             }).subscribe(data => {
 

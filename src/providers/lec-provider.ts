@@ -20,41 +20,13 @@ export class LecProvider {
         this.reqUrl = environment.requestUrl;
     }
 
-    getLecsByCatId(catId: number): Promise<Array<Lec>> {
-        return this._auth.getIdToken().then(idToken => {
-            return new Promise<Array<Lec>>((resolve, reject) => {
-
-                const reqData = {
-                    catId: catId
-                }
-
-                this.http.post(`${this.reqUrl}/lec/list`, reqData, {
-                    headers: new HttpHeaders().set('Authorization', idToken)
-                }).subscribe(data => {
-
-                    const resData = data as ResponseDate;
-
-                    if (resData.res) {
-                        resolve(resData.data as Array<Lec>);
-                    } else {
-                        const msg: string = resData.code + ": " + resData.msg;
-                        reject(msg);
-                    }
-
-                }, err => {
-                    reject(err);
-                });
-            });
-        });
-    }
-
     insertLecs(lecs: Array<Lec>): Promise<any> {
         return this._auth.getIdToken().then(idToken => {
             return new Promise<any>((resolve, reject) => {
 
                 const reqData = lecs;
 
-                this.http.post(`${this.reqUrl}/lec/ad/list/insert`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/lec/list/insert`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -80,7 +52,7 @@ export class LecProvider {
 
                 const reqData = lecs;
 
-                this.http.post(`${this.reqUrl}/lec/ad/list/update`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/lec/list/update`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -106,7 +78,7 @@ export class LecProvider {
 
                 const reqData = lecIds;
 
-                this.http.post(`${this.reqUrl}/lec/ad/list/delete`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/lec/list/delete`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 
@@ -126,7 +98,35 @@ export class LecProvider {
         });
     }
 
-    isExistNameInCat(lec: Lec): Promise<boolean> {
+    getLecsByCatId(catId: number): Promise<Array<Lec>> {
+        return this._auth.getIdToken().then(idToken => {
+            return new Promise<Array<Lec>>((resolve, reject) => {
+
+                const reqData = {
+                    catId: catId
+                }
+
+                this.http.post(`${this.reqUrl}/ad/lec/list`, reqData, {
+                    headers: new HttpHeaders().set('Authorization', idToken)
+                }).subscribe(data => {
+
+                    const resData = data as ResponseDate;
+
+                    if (resData.res) {
+                        resolve(resData.data as Array<Lec>);
+                    } else {
+                        const msg: string = resData.code + ": " + resData.msg;
+                        reject(msg);
+                    }
+
+                }, err => {
+                    reject(err);
+                });
+            });
+        });
+    }
+
+    isExistLecNameInCat(lec: Lec): Promise<boolean> {
         return this._auth.getIdToken().then(idToken => {
             return new Promise<boolean>((resolve, reject) => {
 
@@ -135,7 +135,7 @@ export class LecProvider {
                     catId: lec.catId
                 }
 
-                this.http.post(`${this.reqUrl}/lec/ad/exist-name`, reqData, {
+                this.http.post(`${this.reqUrl}/ad/lec/exist-name`, reqData, {
                     headers: new HttpHeaders().set('Authorization', idToken)
                 }).subscribe(data => {
 

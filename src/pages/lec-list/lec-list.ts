@@ -91,7 +91,7 @@ export class LecListPage {
             num: this.lecs.length + 1
         }
 
-        this._lec.isExistNameInCat(newLec)
+        this._lec.isExistLecNameInCat(newLec)
             .then(isExist => {
 
                 if (isExist) {
