@@ -125,37 +125,4 @@ export class WordProvider {
             });
         });
     }
-
-
-    //////////////////////////////////////////////////////////////////////////////
-    // word-mng/word-insert PAGE
-    //////////////////////////////////////////////////////////////////////////////
-    insertDefaultWord(subId: string): Promise<any> {
-        return this._auth.getIdToken().then(idToken => {
-            return new Promise<any>((resolve, reject) => {
-
-                const reqData = {
-                    subId: subId
-                }
-
-                this.http.post(`${this.reqUrl}/word-mng/ad/default-word/insert`, reqData, {
-                    headers: new HttpHeaders().set('Authorization', idToken)
-                }).subscribe(data => {
-
-                    const resData = data as ResponseDate;
-
-                    if (resData.res) {
-                        resolve();
-                    } else {
-                        const msg: string = resData.code + ": " + resData.msg;
-                        reject(msg);
-                    }
-
-                }, err => {
-                    reject(err);
-                });
-            });
-        });
-    }
-
 }

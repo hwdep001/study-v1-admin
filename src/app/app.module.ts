@@ -23,6 +23,7 @@ import { SubProvider } from './../providers/sub-provider';
 import { CatProvider } from './../providers/cat-provider';
 import { LecProvider } from './../providers/lec-provider';
 import { WordProvider } from './../providers/word-provider';
+import { WordMngProvider } from './../providers/word-mng-provider';
 
 // pages
 import { BackgroundPage } from './../pages/background/background';
@@ -41,8 +42,8 @@ import { UserDetailPage } from './../pages/user-mng/detail/user-detail';
 import { UserRolePage } from './../pages/user-mng/role/user-role';
 import { UserStatPage } from './../pages/user-mng/stat/user-stat';
 import { WordMngTabPage } from './../pages/word-mng/word-mng-tab';
+import { DefaultWordPage } from './../pages/word-mng/default-word/default-word';
 import { WordExcelPage } from './../pages/word-mng/excel/word-excel';
-import { WordInsertPage } from './../pages/word-mng/insert/word-insert';
 import { MyInfoPage } from './../pages/my-info/my-info';
 
 @NgModule({
@@ -64,8 +65,8 @@ import { MyInfoPage } from './../pages/my-info/my-info';
     UserRolePage,
     UserStatPage,
     WordMngTabPage,
+    DefaultWordPage,
     WordExcelPage,
-    WordInsertPage,
     MyInfoPage
   ],
   imports: [
@@ -95,8 +96,8 @@ import { MyInfoPage } from './../pages/my-info/my-info';
     UserRolePage,
     UserStatPage,
     WordMngTabPage,
+    DefaultWordPage,
     WordExcelPage,
-    WordInsertPage,
     MyInfoPage
   ],
   providers: [
@@ -110,7 +111,8 @@ import { MyInfoPage } from './../pages/my-info/my-info';
     SubProvider,
     CatProvider,
     LecProvider,
-    WordProvider
+    WordProvider,
+    WordMngProvider
   ]
 })
 export class AppModule {}

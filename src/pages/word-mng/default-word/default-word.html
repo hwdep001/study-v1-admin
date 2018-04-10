@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>List</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="icontent" scroll=false>
+    <ion-list class="ilist" *ngFor="let rsc of rscs">
+        <ion-list-header class="iheader" no-lines>
+            {{rsc.name}}
+        </ion-list-header>
+        <ion-item-sliding *ngFor="let rc of rsc.roleCats">
+            <ion-item class="ilist-item">
+                {{rc.name}}
+            </ion-item>
+            <ion-item-options side="right" class="ilist-itemoption">
+                <button ion-button color="primary" (click)="showUserInfo(user.uid)">
+                    <ion-icon name="md-add-circle"></ion-icon>
+                    NEW
+                </button>
+                <button ion-button color="secondary" (click)="showUserRole(user.uid)">
+                    <ion-icon name="md-sync"></ion-icon>
+                    SYNC
+                </button>
+                <button ion-button color="gray" (click)="showUserRole(user.uid)">
+                    <ion-icon name="md-sync"></ion-icon>
+                    IDX
+                </button>
+                <button ion-button color="danger" (click)="deleteUser(user.uid)">
+                    <ion-icon name="trash"></ion-icon>
+                    DEL
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+</ion-content>
