@@ -35,9 +35,11 @@ export class WordUtil {
         
         switch(subId) {
             case "sp":
+                result = this.excelData2WordOfSp(datas, lecId);
+                break;
             case "sl":
             case "lw":
-                result = this.excelData2WordOfSpSlLw(datas, lecId);
+                result = this.excelData2WordOfSlLw(datas, lecId);
                 break;
             case "kw":
                 result = this.excelData2WordOfKw(datas, lecId);
@@ -56,7 +58,7 @@ export class WordUtil {
         return result;
     }
 
-    private static excelData2WordOfSpSlLw(
+    private static excelData2WordOfSp(
             datas: Array<Array<any>>,
             lecId: number): Array<Word> {
         let words = new Array<Word>();
@@ -71,7 +73,31 @@ export class WordUtil {
                 word.col02 = data[1] == undefined? null: data[1];
                 word.col03 = data[2] == undefined? null: data[2];
                 word.col04 = data[3] == undefined? null: data[3];
-                word.col05 = data[4] == undefined? null: data[4];
+                if(word.col01 != null) {
+                    words.push(word);
+                }
+            } else {
+                headerFlag = false;
+            }
+        });
+
+        return words;
+    }
+
+    private static excelData2WordOfSlLw(
+            datas: Array<Array<any>>,
+            lecId: number): Array<Word> {
+        let words = new Array<Word>();
+        let word: Word;
+        let headerFlag = true;
+        
+        datas.forEach(data => {
+            if(!headerFlag) {
+                word = this.getNullWord();
+                word.lecId = lecId;
+                word.col01 = data[0] == undefined? null: data[0];
+                word.col02 = data[1] == undefined? null: data[1];
+                word.col03 = data[2] == undefined? null: data[2];
                 if(word.col01 != null) {
                     words.push(word);
                 }
@@ -108,7 +134,7 @@ export class WordUtil {
                 word.col12 = data[11] == undefined? null: data[11];
                 word.col13 = data[12] == undefined? null: data[12];
                 word.col14 = data[13] == undefined? null: data[13];
-                if(word.col08 != null) {
+                if(word.col01 != null) {
                     words.push(word);
                 }
             } else {
@@ -226,9 +252,11 @@ export class WordUtil {
         
         switch(subId) {
             case "sp":
+                result = this.word2ExcelDataOfSp(words);
+                break;
             case "sl":
             case "lw":
-                result = this.word2ExcelDataOfSpSlLw(words);
+                result = this.word2ExcelDataOfSlLw(words);
                 break;
             case "kw":
                 result = this.word2ExcelDataOfKw(words);
@@ -247,7 +275,7 @@ export class WordUtil {
         return result;
     }
 
-    private static word2ExcelDataOfSpSlLw(words: Array<Word>): Array<Array<any>> {
+    private static word2ExcelDataOfSp(words: Array<Word>): Array<Array<any>> {
         let datas = new Array<Array<any>>();
         let data: Array<any>;
         let header = new Array<any>();
@@ -255,7 +283,6 @@ export class WordUtil {
         header.push("choice1");
         header.push("choice2");
         header.push("answer");
-        header.push("answer_num");
         datas.push(header);
 
         words.forEach(word => {
@@ -265,7 +292,27 @@ export class WordUtil {
             data.push(word.col02);
             data.push(word.col03);
             data.push(word.col04);
-            data.push(word.col05);
+            datas.push(data);
+        });
+
+        return datas;
+    }
+
+    private static word2ExcelDataOfSlLw(words: Array<Word>): Array<Array<any>> {
+        let datas = new Array<Array<any>>();
+        let data: Array<any>;
+        let header = new Array<any>();
+        header.push("choice1");
+        header.push("choice2");
+        header.push("answer");
+        datas.push(header);
+
+        words.forEach(word => {
+            data = new Array<any>();
+            
+            data.push(word.col01);
+            data.push(word.col02);
+            data.push(word.col03);
             datas.push(data);
         });
 
@@ -276,6 +323,7 @@ export class WordUtil {
         let datas = new Array<Array<any>>();
         let data: Array<any>;
         let header = new Array<any>();
+        header.push("word");
         header.push("meaning1");
         header.push("meaning2");
         header.push("meaning3");
@@ -283,7 +331,6 @@ export class WordUtil {
         header.push("meaning5");
         header.push("meaning6");
         header.push("meaning7");
-        header.push("word");
         header.push("example1");
         header.push("example2");
         header.push("example3");
