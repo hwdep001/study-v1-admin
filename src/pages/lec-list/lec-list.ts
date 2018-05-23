@@ -9,7 +9,8 @@ import { Sub } from './../../models/Sub';
 import { Cat } from './../../models/Cat';
 import { Lec } from './../../models/Lec';
 
-import { SpsllwListPage } from './../word-list/spsllw-list/spsllw-list';
+import { SpListPage } from './../word-list/sp-list/sp-list';
+import { SllwListPage } from './../word-list/sllw-list/sllw-list';
 import { KwListPage } from './../word-list/kw-list/kw-list';
 import { CcListPage } from './../word-list/cc-list/cc-list';
 import { C4ListPage } from './../word-list/c4-list/c4-list';
@@ -137,9 +138,11 @@ export class LecListPage {
 
         switch(this.sub.id) {
           case "sp":
+            this.navCtrl.push(SpListPage, option);
+            break;
           case "sl":
           case "lw":
-            this.navCtrl.push(SpsllwListPage, option);
+            this.navCtrl.push(SllwListPage, option);
             break;
           case "kw":
             this.navCtrl.push(KwListPage, option);

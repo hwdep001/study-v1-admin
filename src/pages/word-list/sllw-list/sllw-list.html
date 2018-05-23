@@ -45,30 +45,17 @@
     <ion-list class="ilist-add" *ngIf="!isEdit && !isOrder">
       <ion-grid>
         <ion-row>
-          <ion-col col-18>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.col01" placeholder="question" 
+          <ion-col col-30>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.col01" placeholder="choice1" 
               (keyup.enter)="addWord()"></ion-input></ion-item>
           </ion-col>
-          <ion-col col-18>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.col02" placeholder="choice1" 
+          <ion-col col-30>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.col02" placeholder="choice2" 
               (keyup.enter)="addWord()"></ion-input></ion-item>
           </ion-col>
-          <ion-col col-18>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.col03" placeholder="choice2" 
+          <ion-col col-30>
+            <ion-item><ion-input type="text" [(ngModel)]="newWord.col03" placeholder="answer" 
               (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-18>
-            <ion-item><ion-input type="text" [(ngModel)]="newWord.col04" placeholder="answer" 
-              (keyup.enter)="addWord()"></ion-input></ion-item>
-          </ion-col>
-          <ion-col col-18>
-            <ion-item>
-              <ion-label>answer_num</ion-label>
-              <ion-select [(ngModel)]="newWord.col05" okText="Select">
-                <ion-option value="1" [selected]="true">1</ion-option>
-                <ion-option value="2">2</ion-option>
-              </ion-select>
-            </ion-item>
           </ion-col>
           <ion-col col-10>
             <button ion-button item-right (click)="addWord()" >Add</button>
@@ -80,45 +67,29 @@
     <ion-list class="ilist-row" *ngIf="!isOrder">
       
       <ion-row class="row-header">
-        <ion-col col-18><ion-item><ion-label>question</ion-label></ion-item></ion-col>
-        <ion-col col-18><ion-item><ion-label>choice1</ion-label></ion-item></ion-col>
-        <ion-col col-18><ion-item><ion-label>choice2</ion-label></ion-item></ion-col>
-        <ion-col col-18><ion-item><ion-label>answer</ion-label></ion-item></ion-col>
-        <ion-col col-18><ion-item><ion-label>answer_num</ion-label></ion-item></ion-col>
+        <ion-col col-30><ion-item><ion-label>choice1</ion-label></ion-item></ion-col>
+        <ion-col col-30><ion-item><ion-label>choice2</ion-label></ion-item></ion-col>
+        <ion-col col-30><ion-item><ion-label>answer</ion-label></ion-item></ion-col>
       </ion-row>
 
       <ng-container *ngIf="!isEdit" >
       <ion-row class="row-list" *ngFor="let word of words">
-        <ion-col col-18><ion-item><ion-label>{{word.col01}}</ion-label></ion-item></ion-col>
-        <ion-col col-18><ion-item><ion-label>{{word.col02}}</ion-label></ion-item></ion-col>
-        <ion-col col-18><ion-item><ion-label>{{word.col03}}</ion-label></ion-item></ion-col>
-        <ion-col col-18><ion-item><ion-label>{{word.col04}}</ion-label></ion-item></ion-col>
-        <ion-col col-18><ion-item><ion-label>{{word.col05}}</ion-label></ion-item></ion-col>
+        <ion-col col-30><ion-item><ion-label>{{word.col01}}</ion-label></ion-item></ion-col>
+        <ion-col col-30><ion-item><ion-label>{{word.col02}}</ion-label></ion-item></ion-col>
+        <ion-col col-30><ion-item><ion-label>{{word.col03}}</ion-label></ion-item></ion-col>
       </ion-row>
       </ng-container>
 
       <ng-container *ngIf="isEdit" >
       <ion-row class="row-list" *ngFor="let word of words_; let i = index;">
-        <ion-col col-18>
+        <ion-col col-30>
           <ion-item><ion-input type="text" [(ngModel)]="word.col01"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-18>
+        <ion-col col-30>
           <ion-item><ion-input type="text" [(ngModel)]="word.col02"></ion-input></ion-item>
         </ion-col>
-        <ion-col col-18>
+        <ion-col col-30>
           <ion-item><ion-input type="text" [(ngModel)]="word.col03"></ion-input></ion-item>
-        </ion-col>
-        <ion-col col-18>
-          <ion-item><ion-input type="text" [(ngModel)]="word.col04"></ion-input></ion-item>
-        </ion-col>
-        <ion-col col-18>
-          <ion-item>
-            <ion-label>answer_num</ion-label>
-            <ion-select [(ngModel)]="word.col05" okText="Select">
-              <ion-option value="1">1</ion-option>
-              <ion-option value="2">2</ion-option>
-            </ion-select>
-          </ion-item>
         </ion-col>
         <ion-col col-10>
           <ion-item class="item-trash">

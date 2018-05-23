@@ -12,10 +12,10 @@ import { Lec } from './../../../models/Lec';
 import { Word } from './../../../models/Word';
 
 @Component({
-    selector: 'page-spsllwList',
-    templateUrl: 'spsllw-list.html'
+    selector: 'page-sllwList',
+    templateUrl: 'sllw-list.html'
 })
-export class SpsllwListPage {
+export class SllwListPage {
 
     isEdit: boolean = false;
     isOrder: boolean = false;
