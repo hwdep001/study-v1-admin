@@ -142,19 +142,20 @@ export class CatListPage {
 
             const loader = this._cmn.getLoader(null, null);
             loader.present();
-
-            let pros = new Array<Promise<any>>();
-
+            
             this.cats_ = this.reNumberingCats(this.cats_);
-            pros.push(this._cat.updateCats(this.cats_));
-            pros.push(this._cat.deleteCats(this.cats_trash));
-
-            Promise.all(pros)
+            this._cat.deleteCats(this.cats_trash)
                 .then(() => {
-                    this.getCats();
-                    this.isEdit = false;
-                    this.isOrder = false;
-                    loader.dismiss();
+                    this._cat.updateCats(this.cats_)
+                        .then(() => {
+                            this.getCats();
+                            this.isEdit = false;
+                            this.isOrder = false;
+                            loader.dismiss();
+                        }).catch(err => {
+                            console.log(err);
+                            loader.dismiss();
+                        });
                 }).catch(err => {
                     console.log(err);
                     loader.dismiss();

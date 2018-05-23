@@ -181,19 +181,23 @@ export class LecListPage {
             const loader = this._cmn.getLoader(null, null);
             loader.present();
 
-            let pros = new Array<Promise<any>>();
-
             this.lecs_ = this.reNumberingLecs(this.lecs_);
-            pros.push(this._lec.updateLecs(this.lecs_));
-            pros.push(this._lec.deleteLecs(this.lecs_trash));
-
-            Promise.all(pros)
+            this._lec.deleteLecs(this.lecs_trash)
                 .then(() => {
-                    this.getLecs();
-                    this.isEdit = false;
-                    this.isOrder = false;
-                    loader.dismiss();
-                }).catch(err => {
+                    this._lec.updateLecs(this.lecs_)
+                        .then(() => {
+                            this.getLecs();
+                            this.isEdit = false;
+                            this.isOrder = false;
+                            loader.dismiss();
+                        })
+                        .catch(err => {
+                            loader.dismiss();
+                            console.log(err);
+                            alert(err);
+                        });
+                })
+                .catch(err => {
                     loader.dismiss();
                     console.log(err);
                     alert(err);

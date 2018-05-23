@@ -41,7 +41,7 @@ export class UserDetailPage {
         return this._user.getUser(this.user.uid)
             .then(dataMap => {
                 this.user = dataMap["user"];
-                this.roles = dataMap["roles"];
+                this.roles = dataMap["roleList"];
                 this.roleMap = new Map<number, string>();
                 this.roles.forEach(role => {
                     this.roleMap.set(role.id, role.name);

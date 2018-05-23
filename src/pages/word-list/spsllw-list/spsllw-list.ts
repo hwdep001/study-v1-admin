@@ -130,21 +130,25 @@ export class SpsllwListPage {
             const loader = this._cmn.getLoader(null, null);
             loader.present();
 
-            let pros = new Array<Promise<any>>();
-
-            this.words_ = this.reNumberingWords(this.words_);
-            pros.push(this._word.updateWords(this.words_));
-
             this.words_trash = this.reTrashWord(this.words_trash);
-            pros.push(this._word.deleteWords(this.words_trash));
+            this.words_ = this.reNumberingWords(this.words_);
 
-            Promise.all(pros)
+            this._word.deleteWords(this.words_trash)
                 .then(() => {
-                    this.getWords();
-                    this.isEdit = false;
-                    this.isOrder = false;
-                    loader.dismiss();
-                }).catch(err => {
+                    this._word.updateWords(this.words_)
+                        .then(() => {
+                            this.getWords();
+                            this.isEdit = false;
+                            this.isOrder = false;
+                            loader.dismiss();
+                        })
+                        .catch(err => {
+                            loader.dismiss();
+                            console.log(err);
+                            alert(err);
+                        });
+                })
+                .catch(err => {
                     loader.dismiss();
                     console.log(err);
                     alert(err);

@@ -6,7 +6,7 @@ import { environment } from './../environments/environment';
 import { AuthProvider } from './auth-provider';
 
 import { ResponseDate } from './../models/ResponseData';
-import { RoleSubCat } from './../models/RoleSubCat';
+import { Sub7CatList } from './../models/sub/Sub7CatList';
 
 @Injectable()
 export class WordMngProvider {
@@ -20,9 +20,9 @@ export class WordMngProvider {
         this.reqUrl = environment.requestUrl;
     }
 
-    getDefaultWordList(): Promise<any> {
+    getDefaultWordList(): Promise<Array<Sub7CatList>> {
         return this._auth.getIdToken().then(idToken => {
-            return new Promise<any>((resolve, reject) => {
+            return new Promise<Array<Sub7CatList>>((resolve, reject) => {
 
                 const reqData = {
                 }
@@ -34,7 +34,7 @@ export class WordMngProvider {
                     const resData = data as ResponseDate;
 
                     if (resData.res) {
-                        resolve(resData.data as Array<RoleSubCat>);
+                        resolve(resData.data as Array<Sub7CatList>);
                     } else {
                         const msg: string = resData.code + ": " + resData.msg;
                         reject(msg);

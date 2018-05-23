@@ -8,28 +8,28 @@
 </ion-header>
 
 <ion-content class="icontent" scroll=false>
-    <ion-list class="ilist" *ngFor="let rsc of rscs">
+    <ion-list class="ilist" *ngFor="let sub of s7cList">
         <ion-list-header class="iheader" no-lines>
-            {{rsc.name}}
+            {{sub.name}}
         </ion-list-header>
-        <ion-item-sliding *ngFor="let rc of rsc.roleCats">
+        <ion-item-sliding *ngFor="let cat of sub.dcList">
             <ion-item class="ilist-item">
-                {{rc.name}}
+                {{cat.name}}
             </ion-item>
             <ion-item-options side="right" class="ilist-itemoption">
-                <button ion-button color="primary" (click)="showUserInfo(user.uid)">
+                <button ion-button color="primary" (click)="test()">
                     <ion-icon name="md-add-circle"></ion-icon>
                     NEW
                 </button>
-                <button ion-button color="secondary" (click)="showUserRole(user.uid)">
+                <button ion-button color="secondary" (click)="test()">
                     <ion-icon name="md-sync"></ion-icon>
                     SYNC
                 </button>
-                <button ion-button color="gray" (click)="showUserRole(user.uid)">
+                <button ion-button color="gray" (click)="test()">
                     <ion-icon name="md-sync"></ion-icon>
                     IDX
                 </button>
-                <button ion-button color="danger" (click)="deleteUser(user.uid)">
+                <button ion-button color="danger" (click)="test()">
                     <ion-icon name="trash"></ion-icon>
                     DEL
                 </button>

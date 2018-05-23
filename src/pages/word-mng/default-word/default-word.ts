@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { CommonProvider } from './../../../providers/common-provider';
 import { WordMngProvider } from './../../../providers/word-mng-provider';
 
-import { RoleSubCat } from './../../../models/RoleSubCat';
+import { Sub7CatList } from './../../../models/sub/Sub7CatList';
 
 @Component({
     selector: 'page-defaultWord',
@@ -11,7 +11,7 @@ import { RoleSubCat } from './../../../models/RoleSubCat';
 })
 export class DefaultWordPage {
 
-    rscs: Array<RoleSubCat>;
+    s7cList: Array<Sub7CatList>;
 
     constructor(
         private _cmn: CommonProvider,
@@ -26,9 +26,13 @@ export class DefaultWordPage {
 
     getDefaultWordList(): Promise<any> {
         return this._wordMng.getDefaultWordList()
-            .then(rscs => {
-                this.rscs = rscs;
+            .then(s7cList => {
+                this.s7cList = s7cList;
             });
+    }
+
+    test() {
+        
     }
 
     //   createCatLec(subId: string): void {
