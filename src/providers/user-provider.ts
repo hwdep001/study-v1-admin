@@ -7,8 +7,8 @@ import { AuthProvider } from './auth-provider';
 
 import { ResponseDate } from './../models/ResponseData';
 import { User } from './../models/User';
-import { RoleSubCat } from './../models/RoleSubCat';
-import { WordCount } from './../models/WordCount';
+import { RoleSub7CatList } from './../models/sub/RoleSub7CatList';
+import { WordCount } from './../models/sub/WordCount';
 
 @Injectable()
 export class UserProvider {
@@ -131,9 +131,9 @@ export class UserProvider {
         });
     }
 
-    getMenuRolesByUser(uid: string): Promise<Array<RoleSubCat>> {
+    getMenuRolesByUser(uid: string): Promise<Array<RoleSub7CatList>> {
         return this._auth.getIdToken().then(idToken => {
-            return new Promise<Array<RoleSubCat>>((resolve, reject) => {
+            return new Promise<Array<RoleSub7CatList>>((resolve, reject) => {
 
                 const data = {
                     uid: uid
@@ -146,7 +146,7 @@ export class UserProvider {
                     const resData = data as ResponseDate;
 
                     if (resData.res) {
-                        resolve(resData.data as Array<RoleSubCat>);
+                        resolve(resData.data as Array<RoleSub7CatList>);
                     } else {
                         const msg: string = resData.code + ": " + resData.msg;
                         reject(msg);
@@ -159,13 +159,13 @@ export class UserProvider {
         });
     }
 
-    updateMenuRolesByUser(uid: string, roleSubCat: Array<RoleSubCat>): Promise<any> {
+    updateMenuRolesByUser(uid: string, roleSub7CatList: Array<RoleSub7CatList>): Promise<any> {
         return this._auth.getIdToken().then(idToken => {
             return new Promise<any>((resolve, reject) => {
 
                 const reqData = {
                     uid: uid,
-                    rscDTOList: roleSubCat
+                    roleSub7CatList: roleSub7CatList
                 }
 
                 this.http.post(`${this.reqUrl}/ad/user/menu-role/list/update`, reqData, {

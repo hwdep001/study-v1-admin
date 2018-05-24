@@ -4,7 +4,7 @@ import { NavParams } from 'ionic-angular';
 import { CommonProvider } from './../../../providers/common-provider';
 import { UserProvider } from './../../../providers/user-provider';
 
-import { RoleSubCat } from './../../../models/RoleSubCat';
+import { RoleSub7CatList } from './../../../models/sub/RoleSub7CatList';
 
 @Component({
     selector: 'page-userRole',
@@ -14,7 +14,7 @@ export class UserRolePage {
 
     uid: string;
     allRole: boolean = true;
-    rscs: Array<RoleSubCat>;
+    rscs: Array<RoleSub7CatList>;
 
     constructor(
         private param: NavParams,
@@ -48,7 +48,7 @@ export class UserRolePage {
     changeAllRole() {
         this.rscs.forEach(rsc => {
             rsc.isChecked = this.allRole;
-            rsc.roleCats.forEach(rc => rc.isChecked = this.allRole);
+            rsc.roleCatList.forEach(rc => rc.isChecked = this.allRole);
         });
     }
 

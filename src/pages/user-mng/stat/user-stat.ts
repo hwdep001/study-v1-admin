@@ -4,7 +4,7 @@ import { NavParams } from 'ionic-angular';
 import { CommonProvider } from './../../../providers/common-provider';
 import { UserProvider } from './../../../providers/user-provider';
 
-import { WordCount } from './../../../models/WordCount';
+import { WordCount } from './../../../models/sub/WordCount';
 
 @Component({
     selector: 'page-userStat',
