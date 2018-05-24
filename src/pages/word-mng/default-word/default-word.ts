@@ -43,7 +43,7 @@ export class DefaultWordPage {
     createDefaultCatLec(catId: number): void {
         this._cmn.Alert.confirm("기본 Category와 Lecture를 생성하시겠습니까", "Warning").then(yes => {
 
-            const loader = this._cmn.getLoader(null, null);
+            const loader = this._cmn.getLoader(null, null, 120000);
             loader.present();
 
             this._wordMng.createDefaultCatLec(catId)
@@ -66,7 +66,7 @@ export class DefaultWordPage {
     insertDefaultWord(): void {
         this._cmn.Alert.confirm("단어를 등록하시겠습니까", "Warning").then(yes => {
 
-            const loader = this._cmn.getLoader(null, null);
+            const loader = this._cmn.getLoader(null, null, 120000);
             loader.present();
 
             this._wordMng.insertDefaultWord(this.reqFile)
@@ -90,7 +90,7 @@ export class DefaultWordPage {
     updateDefaultWord(): void {
         this._cmn.Alert.confirm("단어를 업데이트하시겠습니까", "Warning").then(yes => {
 
-            const loader = this._cmn.getLoader(null, null);
+            const loader = this._cmn.getLoader(null, null, 120000);
             loader.present();
 
             this._wordMng.upload7Check(this.reqFile)
@@ -110,7 +110,7 @@ export class DefaultWordPage {
     deleteDefault(catId: number): void {
         this._cmn.Alert.confirm("기본 Category, Lecture, Word를 삭제하시겠습니까", "Warning").then(yes => {
 
-            const loader = this._cmn.getLoader(null, null);
+            const loader = this._cmn.getLoader(null, null, 120000);
             loader.present();
 
             this._wordMng.deleteDefault(catId)
@@ -163,23 +163,5 @@ export class DefaultWordPage {
             this.updateDefaultWord();
         }
     }
-
-    //   createCatLec(subId: string): void {
-    //     this._cmn.Alert.confirm("새로 생성하면 기존 단어는 모두 삭제 됩니다. 계속하시겠습니까?", "Warning").then(yes => {
-
-    //         const loader = this._cmn.getLoader(null, null);
-    //         loader.present();
-
-    //         this._word.insertDefaultWord(subId)
-    //             .then(() => {
-    //                 this._cmn.Toast.present("top", "생성되었습니다.", "toast-success");
-    //                 loader.dismiss();
-    //             })
-    //             .catch(err => {
-    //                 loader.dismiss();
-    //                 console.log(err);
-    //                 alert(err);
-    //             });
-    //     }).catch(() => null);
-    //   }
+    
 }

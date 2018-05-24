@@ -79,6 +79,33 @@ export class WordMngProvider {
         });
     }
 
+    createAllDefaultCatLec(): Promise<InsertDefaultCount> {
+        return this._auth.getIdToken().then(idToken => {
+            return new Promise<InsertDefaultCount>((resolve, reject) => {
+
+                const reqData = {
+                }
+                
+                this.http.post(`${this.reqUrl}/ad/word-mng/etc/insert-all/cat-lec`, reqData, {
+                    headers: new HttpHeaders().set('Authorization', idToken)
+                }).subscribe(data => {
+
+                    const resData = data as ResponseDate;
+
+                    if (resData.res) {
+                        resolve(resData.data as InsertDefaultCount);
+                    } else {
+                        const msg: string = resData.code + ": " + resData.msg;
+                        reject(msg);
+                    }
+
+                }, err => {
+                    reject(err);
+                });
+            });
+        });
+    }
+
     insertDefaultWord(file: File): Promise<UpdateWordCount> {
         return this._auth.getIdToken().then(idToken => {
             return new Promise<UpdateWordCount>((resolve, reject) => {
@@ -153,6 +180,60 @@ export class WordMngProvider {
 
                     if (resData.res) {
                         resolve(resData.data as DeleteDefaultCount);
+                    } else {
+                        const msg: string = resData.code + ": " + resData.msg;
+                        reject(msg);
+                    }
+
+                }, err => {
+                    reject(err);
+                });
+            });
+        });
+    }
+
+    deleteAllDefault(): Promise<DeleteDefaultCount> {
+        return this._auth.getIdToken().then(idToken => {
+            return new Promise<DeleteDefaultCount>((resolve, reject) => {
+
+                const reqData = {
+                }
+                
+                this.http.post(`${this.reqUrl}/ad/word-mng/etc/delete-all`, reqData, {
+                    headers: new HttpHeaders().set('Authorization', idToken)
+                }).subscribe(data => {
+
+                    const resData = data as ResponseDate;
+
+                    if (resData.res) {
+                        resolve(resData.data as DeleteDefaultCount);
+                    } else {
+                        const msg: string = resData.code + ": " + resData.msg;
+                        reject(msg);
+                    }
+
+                }, err => {
+                    reject(err);
+                });
+            });
+        });
+    }
+
+    reorderId(): Promise<any> {
+        return this._auth.getIdToken().then(idToken => {
+            return new Promise<any>((resolve, reject) => {
+
+                const reqData = {
+                }
+                
+                this.http.post(`${this.reqUrl}/ad/word-mng/etc/reorder-id`, reqData, {
+                    headers: new HttpHeaders().set('Authorization', idToken)
+                }).subscribe(data => {
+
+                    const resData = data as ResponseDate;
+
+                    if (resData.res) {
+                        resolve();
                     } else {
                         const msg: string = resData.code + ": " + resData.msg;
                         reject(msg);
