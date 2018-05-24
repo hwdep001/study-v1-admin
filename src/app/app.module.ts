@@ -44,7 +44,7 @@ import { UserRolePage } from './../pages/user-mng/role/user-role';
 import { UserStatPage } from './../pages/user-mng/stat/user-stat';
 import { WordMngTabPage } from './../pages/word-mng/word-mng-tab';
 import { DefaultWordPage } from './../pages/word-mng/default-word/default-word';
-import { WordExcelPage } from './../pages/word-mng/excel/word-excel';
+import { WordEtcPage } from './../pages/word-mng/etc/word-etc';
 import { MyInfoPage } from './../pages/my-info/my-info';
 
 @NgModule({
@@ -68,7 +68,7 @@ import { MyInfoPage } from './../pages/my-info/my-info';
     UserStatPage,
     WordMngTabPage,
     DefaultWordPage,
-    WordExcelPage,
+    WordEtcPage,
     MyInfoPage
   ],
   imports: [
@@ -100,7 +100,7 @@ import { MyInfoPage } from './../pages/my-info/my-info';
     UserStatPage,
     WordMngTabPage,
     DefaultWordPage,
-    WordExcelPage,
+    WordEtcPage,
     MyInfoPage
   ],
   providers: [

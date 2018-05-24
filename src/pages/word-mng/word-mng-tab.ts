@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { DefaultWordPage } from './default-word/default-word';
-import { WordExcelPage } from './excel/word-excel';
+import { WordEtcPage } from './etc/word-etc';
 
 @Component({
   selector: 'page-wordMngTab',
@@ -10,7 +10,7 @@ import { WordExcelPage } from './excel/word-excel';
 export class WordMngTabPage {
 
   tab1Root: any = DefaultWordPage;
-  tab2Root: any = WordExcelPage;
+  tab2Root: any = WordEtcPage;
 
   constructor() {
 

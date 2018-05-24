@@ -4,5 +4,5 @@ export class Sub7CatList {
     id?: String;
     name?: String;
     num?: number;
-    dcList?: Array<Cat>;
+    catList?: Array<Cat>;
 }

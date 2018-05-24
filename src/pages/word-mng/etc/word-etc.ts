@@ -5,10 +5,10 @@ import { Component } from '@angular/core';
 import { FileProvider } from './../../../providers/file-provider';
 
 @Component({
-    selector: 'page-wordExcel',
-    templateUrl: 'word-excel.html'
+    selector: 'page-wordEtc',
+    templateUrl: 'word-etc.html'
 })
-export class WordExcelPage {
+export class WordEtcPage {
 
     constructor(
         private _file: FileProvider
