@@ -101,7 +101,7 @@
             <ion-input type="text" [(ngModel)]="lec.name"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col col-15 *ngIf="isEdit" >
+        <ion-col col-15 *ngIf="isEdit && lec.isDefault == 0" >
           <ion-item class="item-trash">
             <ion-buttons (click)="trashLec(i, lec)">
               <button ion-button clear icon-only color="danger">

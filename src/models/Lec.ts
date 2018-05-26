@@ -3,4 +3,5 @@ export class Lec {
     name?: string;
     num?: number;
     catId?: number;
+    isDefault?: number;
 }
