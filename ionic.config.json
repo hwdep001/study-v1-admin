@@ -1,8 +1,9 @@
 {
   "name": "study-v5-admin",
-  "app_id": "93a29c3b",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "pro_id": "93a29c3b",
+  "id": "93a29c3b"
 }
